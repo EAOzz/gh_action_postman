@@ -674,25 +674,25 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "462cc3ea-c96e-4b5c-959f-228222773118",
 								"exec": [
-									"pm.test(\"Status code is 400\", () => {\r",
-									"    pm.response.to.have.status(400);\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
 									""
 								],
-								"type": "text/javascript",
-								"id": "462cc3ea-c96e-4b5c-959f-228222773118"
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "prerequest",
 							"script": {
+								"id": "4e59d0b4-e8c8-4aba-bcbd-84ee0593c4dc",
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"id": "4e59d0b4-e8c8-4aba-bcbd-84ee0593c4dc"
+								"type": "text/javascript"
 							}
 						}
 					],

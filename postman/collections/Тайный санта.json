@@ -1,0 +1,805 @@
+{
+	"info": {
+		"_postman_id": "3fed109c-96c0-4ab4-92bb-ced7790afa20",
+		"name": "Тайный санта",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "20180870-3fed109c-96c0-4ab4-92bb-ced7790afa20"
+	},
+	"item": [
+		{
+			"name": "Логин",
+			"item": [
+				{
+					"name": "Авторизация незарегистрированного пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", () => {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json()\r",
+									"\r",
+									"console.log (response.error)\r",
+									"\r",
+									"pm.test(\"Сообщение об ошибке\", () => {\r",
+									"    pm.expect(response.error.message).to.eql(\"USER_NOT_FOUND\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"id": "b9e8fd71-f6c4-4046-87d7-7a772d514424"
+							}
+						}
+					],
+					"id": "dfa18ad0-97d1-46cc-8e91-28e3f0fec009",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"k@mail.ru\", \"password\": \"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/login?redirect=%2F",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "redirect",
+									"value": "%2F"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Смена пароля",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json()\r",
+									"\r",
+									"console.log (response)\r",
+									"\r",
+									"pm.test(\"Проверка ID пользователя\", () => {\r",
+									"    pm.expect(response.id).to.eql(3000038);\r",
+									"})\r",
+									"\r",
+									"const reqData = JSON.parse(request.data)\r",
+									"console.log(request.data)\r",
+									"pm.environment.set(\"password\", reqData.password)"
+								],
+								"type": "text/javascript",
+								"id": "c9a7a9ac-17e0-4030-be7d-1933b575a5d4"
+							}
+						}
+					],
+					"id": "c9c19860-538a-4125-8e46-27e4a387ee8a",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"strictSSL": true,
+						"disableUrlEncoding": true,
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJNb24lMkMlMjAyNyUyME5vdiUyMDIwMjMlMjAxOSUzQTU4JTNBMzklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; _gid=GA1.2.282868501.1670353537; _ohmybid_cmf=2; last_visit=1670343151048%3A%3A1670353951048; t3_sid_7627570=s1.2117857176.1670353646149.1670353951056.4.5; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQzMTMyNiwiZXhwIjoxNjcwNDM0OTI2fQ.VI_Ch-2eMf7XNyT2JzDBzb8S61VVShtR5JMF33VIkSY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"password\": \"{{$randomPassword}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/account/password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Авторизация с корректными почтой/паролем",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json()\r",
+									"\r",
+									"console.log (response)\r",
+									"\r",
+									"pm.test(\"Проверка ID пользователя\", () => {\r",
+									"    pm.expect(response.id).to.eql(3000038);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"id": "51a721bb-bb94-46c1-bafd-85ff21e1f5d0"
+							}
+						}
+					],
+					"id": "01b41817-21cc-400a-beee-21a9d6a3be93",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"{{login}}\", \"password\": \"{{password}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/login?redirect=%2F",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "redirect",
+									"value": "%2F"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "9e3c7874-1753-418a-87bb-821433eb5a06"
+		},
+		{
+			"name": "Коробка",
+			"item": [
+				{
+					"name": "Создание коробки с подарком",
+					"item": [
+						{
+							"name": "Авторизация с корректными почтой/паролем",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const response = pm.response.json()\r",
+											"\r",
+											"console.log (response)\r",
+											"\r",
+											"pm.test(\"Проверка ID пользователя\", () => {\r",
+											"    pm.expect(response.id).to.eql(3000038);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"id": "6ce19426-66ca-4ab5-a038-e7b6de6eb475"
+									}
+								}
+							],
+							"id": "53380bcf-08b3-497b-af03-cdcda769902f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"email\": \"{{login}}\", \"password\": \"{{password}}\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/login?redirect=%2F",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"login"
+									],
+									"query": [
+										{
+											"key": "redirect",
+											"value": "%2F"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получение ключа",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const keybox = pm.response.text()\r",
+											"pm.environment.set(\"keybox\",keybox);"
+										],
+										"type": "text/javascript",
+										"id": "03afddc1-4c38-45a2-956c-eea2eecb91de"
+									}
+								}
+							],
+							"id": "56f75bba-6ca3-401a-86e3-43ee32dfec19",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _gid=GA1.2.282868501.1670353537; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; _ohmybid_cmf=2; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJGcmklMkMlMjAwOCUyMERlYyUyMDIwMjMlMjAwMyUzQTE2JTNBNTklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQ2OTQzMSwiZXhwIjoxNjcwNDczMDMxfQ.6qGz1M77naDFmGGJLRycCO5MvrfBSC8Rtdr-kWUIC6M; last_visit=1670458632406%3A%3A1670469432406; t3_sid_7627570=s1.1686707051.1670469432403.1670469432482.6.2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"email\": \"{{login}}\", \"password\": \"{{password}}\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/box/key",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"box",
+										"key"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Название коробки",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const response = pm.response.json()\r",
+											"\r",
+											"console.log (response)\r",
+											"\r",
+											"pm.test(\"Проверка названия коробки\", () => {\r",
+											"    pm.expect(response.box.name).to.eql(pm.environment.get(\"namebox\"));\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"id": "a36201b3-3651-411b-8a28-1306d6f72a05"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"id": "db1440a4-164f-49e8-b471-0a8ebe355241"
+									}
+								}
+							],
+							"id": "19d442ef-5237-4574-ba5f-e247ad670117",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _gid=GA1.2.282868501.1670353537; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; _ohmybid_cmf=2; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJGcmklMkMlMjAwOCUyMERlYyUyMDIwMjMlMjAwMyUzQTE2JTNBNTklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQ2OTQzMSwiZXhwIjoxNjcwNDczMDMxfQ.6qGz1M77naDFmGGJLRycCO5MvrfBSC8Rtdr-kWUIC6M; last_visit=1670460513912%3A%3A1670471313912; t3_sid_7627570=s1.1686707051.1670469432403.1670471313954.6.24",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usePost\": false,\r\n    \"useWish\": true,\r\n    \"cashLimit\": null,\r\n    \"cashLimitCurrency\": null,\r\n    \"createAdminCard\": null,\r\n    \"email\": null,\r\n    \"isArchived\": null,\r\n    \"isCreated\": null,\r\n    \"isInviteAfterDraw\": null,\r\n    \"isPhoneRequired\": false,\r\n    \"key\": \"{{keybox}}\",\r\n    \"logo\": null,\r\n    \"name\": \"{{namebox}}\",\r\n    \"picture\": null,\r\n    \"useCashLimit\": false,\r\n    \"useCircleDraw\": null,\r\n    \"useNames\": true,\r\n    \"usePost\": false,\r\n    \"useWish\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/box",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"box"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Выбор иконки коробки",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const response = pm.response.json()\r",
+											"\r",
+											"console.log (response)\r",
+											"\r",
+											"pm.test(\"Проверка иконки коробки\", () => {\r",
+											"    pm.expect(response.box.picture).to.eql(pm.environment.get(\"picture\"));\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"id": "1f41eca7-311e-42bf-9f18-ad2343854b56"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"id": "b7ed396b-5ee0-4e13-9d29-965d095ac068"
+									}
+								}
+							],
+							"id": "b7cd048f-ef7b-42ca-a089-849985df1934",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _gid=GA1.2.282868501.1670353537; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; _ohmybid_cmf=2; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJGcmklMkMlMjAwOCUyMERlYyUyMDIwMjMlMjAwMyUzQTE2JTNBNTklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQ2OTQzMSwiZXhwIjoxNjcwNDczMDMxfQ.6qGz1M77naDFmGGJLRycCO5MvrfBSC8Rtdr-kWUIC6M; last_visit=1670460513912%3A%3A1670471313912; t3_sid_7627570=s1.1686707051.1670469432403.1670471313954.6.24",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usePost\": false,\r\n    \"useWish\": true,\r\n    \"cashLimit\": null,\r\n    \"cashLimitCurrency\": null,\r\n    \"createAdminCard\": null,\r\n    \"email\": null,\r\n    \"isArchived\": null,\r\n    \"isCreated\": null,\r\n    \"isInviteAfterDraw\": null,\r\n    \"isPhoneRequired\": false,\r\n    \"key\": \"{{keybox}}\",\r\n    \"logo\": null,\r\n    \"name\": \"{{namebox}}\",\r\n    \"picture\": \"{{picture}}\",\r\n    \"useCashLimit\": null,\r\n    \"useCircleDraw\": null,\r\n    \"useNames\": true,\r\n    \"usePost\": false,\r\n    \"useWish\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/box",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"box"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Задание лимита стоимости коробки",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"id": "63eeb9f3-fb31-4910-83b7-58adf0f686cc"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"id": "f33e1d02-8e26-4896-a348-d52c8cd8b40f"
+									}
+								}
+							],
+							"id": "81db1ebe-d718-4768-b258-46c980820411",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _gid=GA1.2.282868501.1670353537; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; _ohmybid_cmf=2; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJGcmklMkMlMjAwOCUyMERlYyUyMDIwMjMlMjAwMyUzQTE2JTNBNTklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQ2OTQzMSwiZXhwIjoxNjcwNDczMDMxfQ.6qGz1M77naDFmGGJLRycCO5MvrfBSC8Rtdr-kWUIC6M; last_visit=1670460513912%3A%3A1670471313912; t3_sid_7627570=s1.1686707051.1670469432403.1670471313954.6.24",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usePost\": false,\r\n    \"useWish\": true,\r\n    \"cashLimit\": \"{{cashLimit}}\",\r\n    \"cashLimitCurrency\": \"rub\",\r\n    \"createAdminCard\": null,\r\n    \"email\": null,\r\n    \"isArchived\": null,\r\n    \"isCreated\": null,\r\n    \"isInviteAfterDraw\": null,\r\n    \"isPhoneRequired\": false,\r\n    \"key\": \"{{keybox}}\",\r\n    \"logo\": null,\r\n    \"name\": \"{{namebox}}\",\r\n    \"picture\": \"{{picture}}\",\r\n    \"useCashLimit\": true,\r\n    \"useCircleDraw\": null,\r\n    \"useNames\": true,\r\n    \"usePost\": false,\r\n    \"useWish\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/box",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"box"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Создание коробки",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const response = pm.response.json()\r",
+											"\r",
+											"console.log (response)\r",
+											"\r",
+											"pm.test(\"Проверка ключа коробки\", () => {\r",
+											"    pm.expect(response.box.key).to.eql(pm.environment.get(\"keybox\"));\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"id": "5e606697-1fbe-4fa7-8893-17ef437f620d"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"id": "d1039001-61a0-4665-b96b-6e19a0162e8e"
+									}
+								}
+							],
+							"id": "490c1f7e-c9de-4e77-9eb4-2874ae9da782",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _gid=GA1.2.282868501.1670353537; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; _ohmybid_cmf=2; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJGcmklMkMlMjAwOCUyMERlYyUyMDIwMjMlMjAwMyUzQTE2JTNBNTklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQ2OTQzMSwiZXhwIjoxNjcwNDczMDMxfQ.6qGz1M77naDFmGGJLRycCO5MvrfBSC8Rtdr-kWUIC6M; last_visit=1670460513912%3A%3A1670471313912; t3_sid_7627570=s1.1686707051.1670469432403.1670471313954.6.24",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usePost\": true,\r\n    \"useWish\": true,\r\n    \"cashLimit\": \"{{cashLimit}}\",\r\n    \"cashLimitCurrency\": \"rub\",\r\n    \"createAdminCard\": null,\r\n    \"email\": null,\r\n    \"isArchived\": null,\r\n    \"isCreated\": true,\r\n    \"isInviteAfterDraw\": null,\r\n    \"isPhoneRequired\": true,\r\n    \"key\": \"{{keybox}}\",\r\n    \"logo\": null,\r\n    \"name\": \"{{namebox}}\",\r\n    \"picture\": \"{{picture}}\",\r\n    \"useCashLimit\": true,\r\n    \"useCircleDraw\": null,\r\n    \"useNames\": true,\r\n    \"usePost\": true,\r\n    \"useWish\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/box",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"box"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "2d3ae1d5-2998-44c0-8398-93de0efdc2b1"
+				},
+				{
+					"name": "Редактирование коробки",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const response = pm.response.json()\r",
+									"\r",
+									"const reqData = JSON.parse(request.data)\r",
+									"\r",
+									"\r",
+									"pm.test(\"Проверка ключа названия коробки\", () => {\r",
+									"    pm.expect(response.box.name).to.eql(reqData.name);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"id": "dd93372c-1030-4176-a95d-5a70354259d1"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"id": "99d8e568-572e-43c1-ab7b-75e30a86a83e"
+							}
+						}
+					],
+					"id": "59f5eb03-8cc1-4715-b59e-1d3349fcbd6e",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {},
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _gid=GA1.2.282868501.1670353537; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; _ohmybid_cmf=2; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJGcmklMkMlMjAwOCUyMERlYyUyMDIwMjMlMjAwMyUzQTE2JTNBNTklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQ2OTQzMSwiZXhwIjoxNjcwNDczMDMxfQ.6qGz1M77naDFmGGJLRycCO5MvrfBSC8Rtdr-kWUIC6M; last_visit=1670460513912%3A%3A1670471313912; t3_sid_7627570=s1.1686707051.1670469432403.1670471313954.6.24",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usePost\": true,\r\n    \"useWish\": true,\r\n    \"cashLimit\": \"{{cashLimit}}\",\r\n    \"cashLimitCurrency\": \"rub\",\r\n    \"createAdminCard\": null,\r\n    \"email\": null,\r\n    \"isArchived\": null,\r\n    \"isCreated\": {{$randomBoolean}},\r\n    \"isInviteAfterDraw\": null,\r\n    \"isPhoneRequired\": {{$randomBoolean}},\r\n    \"key\": \"{{keybox}}\",\r\n    \"logo\": null,\r\n    \"name\": \"Вторая\",\r\n    \"picture\": \"{{cake}}\",\r\n    \"useCashLimit\": {{$randomBoolean}},\r\n    \"useCircleDraw\": null,\r\n    \"useNames\": {{$randomBoolean}},\r\n    \"usePost\": {{$randomBoolean}},\r\n    \"useWish\": {{$randomBoolean}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/box",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"box"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание коробки с повторяющимся ключем",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", () => {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "462cc3ea-c96e-4b5c-959f-228222773118"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"id": "4e59d0b4-e8c8-4aba-bcbd-84ee0593c4dc"
+							}
+						}
+					],
+					"id": "44fa2ab9-3be1-4266-9d7d-e8d913b77cce",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {},
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _gid=GA1.2.282868501.1670353537; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; _ohmybid_cmf=2; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJGcmklMkMlMjAwOCUyMERlYyUyMDIwMjMlMjAwMyUzQTE2JTNBNTklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQ2OTQzMSwiZXhwIjoxNjcwNDczMDMxfQ.6qGz1M77naDFmGGJLRycCO5MvrfBSC8Rtdr-kWUIC6M; last_visit=1670460513912%3A%3A1670471313912; t3_sid_7627570=s1.1686707051.1670469432403.1670471313954.6.24",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usePost\": true,\r\n    \"useWish\": true,\r\n    \"cashLimit\": \"{{cashLimit}}\",\r\n    \"cashLimitCurrency\": \"rub\",\r\n    \"createAdminCard\": null,\r\n    \"email\": null,\r\n    \"isArchived\": null,\r\n    \"isCreated\": true,\r\n    \"isInviteAfterDraw\": null,\r\n    \"isPhoneRequired\": true,\r\n    \"key\": \"{{keybox}}\",\r\n    \"logo\": null,\r\n    \"name\": \"Вторая\",\r\n    \"picture\": \"{{picture}}\",\r\n    \"useCashLimit\": true,\r\n    \"useCircleDraw\": null,\r\n    \"useNames\": true,\r\n    \"usePost\": true,\r\n    \"useWish\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/box",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"box"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление коробки",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "1ab3c9e9-56fb-4ff2-8e62-edb0c910fc8a"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"id": "e87f5a26-c51d-4b69-a37a-977de76de6d0"
+							}
+						}
+					],
+					"id": "d022c34b-360d-4a9c-8efd-e9e077018e6f",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {},
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "_ym_uid=1668970860217743047; _ym_d=1668970860; adtech_uid=b55d5ef0-c34d-4843-bc40-52d7f08716cb%3Alpitko.ru; top100_id=t1.7627570.391497714.1669458980499; _ga=GA1.2.1499510737.1669557308; seedr_cid=ed7c6564-da34-4be8-be59-f5b21a6cb966; _gid=GA1.2.282868501.1670353537; connect.sid=s%3AbajvafVCqJbSwDIM0afg2MFPYRbuNsk4.j5C2%2BuVGHa5jdR5YDX1TQjBr89MCU3Lr%2BM1hxIGuEeQ; _ym_isad=2; _ohmybid_cmf=2; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zdGFnaW5nLmxwaXRrby5ydSUyMiUyQyUyMmV4cGlyZXMlMjIlM0ElMjJGcmklMkMlMjAwOCUyMERlYyUyMDIwMjMlMjAwMyUzQTE2JTNBNTklMjBHTVQlMjIlMkMlMjJTYW1lU2l0ZSUyMiUzQSUyMkxheCUyMiUyQyUyMnZhbHVlJTIyJTNBJTIyJTdCJTVDJTIydmFsdWUlNUMlMjIlM0ElNUMlMjI0MWNmYjhjYTQwMTEwNzJmODQ5NWFkZDBhYTUwODVkNyU1QyUyMiUyQyU1QyUyMmZwanNGb3JtYXQlNUMlMjIlM0F0cnVlJTdEJTIyJTdE; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMzgsImlhdCI6MTY3MDQ2OTQzMSwiZXhwIjoxNjcwNDczMDMxfQ.6qGz1M77naDFmGGJLRycCO5MvrfBSC8Rtdr-kWUIC6M; last_visit=1670460513912%3A%3A1670471313912; t3_sid_7627570=s1.1686707051.1670469432403.1670471313954.6.24",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/box/{{keybox}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"box",
+								"{{keybox}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "b08edf02-803f-4ead-ae3a-2607b141a4d5"
+		}
+	]
+}

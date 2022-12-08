@@ -74,6 +74,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "c9a7a9ac-17e0-4030-be7d-1933b575a5d4",
 								"exec": [
 									"pm.test(\"Status code is 200\", () => {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -91,8 +92,7 @@
 									"console.log(request.data)\r",
 									"pm.environment.set(\"password\", reqData.password)"
 								],
-								"type": "text/javascript",
-								"id": "c9a7a9ac-17e0-4030-be7d-1933b575a5d4"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -114,7 +114,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"password\": \"{{$randomPassword}}\"}",
+							"raw": "{\"password\": \"{{$passwordNew}}\"}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -69,6 +69,65 @@
 					"response": []
 				},
 				{
+					"name": "Авторизация с корректными почтой/паролем",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json()\r",
+									"\r",
+									"console.log (response)\r",
+									"\r",
+									"pm.test(\"Проверка ID пользователя\", () => {\r",
+									"    pm.expect(response.id).to.eql(3000038);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"id": "51a721bb-bb94-46c1-bafd-85ff21e1f5d0"
+							}
+						}
+					],
+					"id": "01b41817-21cc-400a-beee-21a9d6a3be93",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"{{login}}\", \"password\": \"{{password}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/login?redirect=%2F",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "redirect",
+									"value": "%2F"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Смена пароля",
 					"event": [
 						{
@@ -130,65 +189,6 @@
 								"api",
 								"account",
 								"password"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Авторизация с корректными почтой/паролем",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"const response = pm.response.json()\r",
-									"\r",
-									"console.log (response)\r",
-									"\r",
-									"pm.test(\"Проверка ID пользователя\", () => {\r",
-									"    pm.expect(response.id).to.eql(3000038);\r",
-									"})"
-								],
-								"type": "text/javascript",
-								"id": "51a721bb-bb94-46c1-bafd-85ff21e1f5d0"
-							}
-						}
-					],
-					"id": "01b41817-21cc-400a-beee-21a9d6a3be93",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"email\": \"{{login}}\", \"password\": \"{{password}}\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/login?redirect=%2F",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"login"
-							],
-							"query": [
-								{
-									"key": "redirect",
-									"value": "%2F"
-								}
 							]
 						}
 					},
